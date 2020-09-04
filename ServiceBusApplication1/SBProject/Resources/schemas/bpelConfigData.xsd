@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="bpelConfigData.xsd"
+            targetNamespace="bpelConfigData.xsd" elementFormDefault="qualified">
+  <xsd:element name="bpelConfigdataType">
+  <xsd:complexType>
+    <xsd:annotation>
+      <xsd:documentation>config data para bpels</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+    <xsd:element name="encoding" type="xsd:string"/>
+    <xsd:element name="country" type="xsd:string"/>
+    <xsd:element name="environment" type="xsd:string"/>
+    <xsd:element name="description" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="getConfigData.xsd" targetNamespace="getConfigData.xsd"
+            elementFormDefault="qualified">
+  <xsd:element name="getConfigData">
+    <xsd:annotation>
+      <xsd:documentation>getConfigData</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+    <xsd:sequence>
+    <xsd:element name="configId" type="xsd:int"/>
+    </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

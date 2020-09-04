@@ -1,0 +1,14 @@
+<adapter-config name="dbAdapter" adapter="db" wsdlLocation="dbAdapter.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="config_db" location="eis/config_manager_jndi"/>
+  <endpoint-interaction portType="dbAdapter_ptt" operation="dbAdapterSelect">
+    <interaction-spec className="oracle.tip.adapter.db.DBReadInteractionSpec">
+      <property name="DescriptorName" value="dbAdapter.BpelConfigs"/>
+      <property name="QueryName" value="dbAdapterSelect"/>
+      <property name="MappingsMetaDataURL" value="dbAdapter-or-mappings.xml"/>
+      <property name="ReturnSingleResultSet" value="false"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

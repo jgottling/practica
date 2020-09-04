@@ -1,0 +1,24 @@
+<wsdl:definitions name="dbAdapter" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/ServiceBusApplication1/SBProject/dbAdapter" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/ServiceBusApplication1/SBProject/dbAdapter" xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/dbAdapter" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <plt:partnerLinkType name="dbAdapter_plt">
+    <plt:role name="dbAdapter_role">
+      <plt:portType name="tns:dbAdapter_ptt"/>
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+        <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/dbAdapter" schemaLocation="dbAdapter_table.xsd"/>
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="dbAdapterSelect_inputParameters">
+        <wsdl:part name="dbAdapterSelect_inputParameters" element="top:dbAdapterSelectInputParameters"/>
+    </wsdl:message>
+    <wsdl:message name="BpelConfigsCollection_msg">
+        <wsdl:part name="BpelConfigsCollection" element="top:BpelConfigsCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="dbAdapter_ptt">
+        <wsdl:operation name="dbAdapterSelect">
+            <wsdl:input message="tns:dbAdapterSelect_inputParameters"/>
+            <wsdl:output message="tns:BpelConfigsCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

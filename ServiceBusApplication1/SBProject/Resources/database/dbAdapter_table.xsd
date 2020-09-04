@@ -1,0 +1,32 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/dbAdapter" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/dbAdapter" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="BpelConfigsCollection" type="BpelConfigsCollection"/>
+   <xs:complexType name="BpelConfigsCollection">
+      <xs:sequence>
+         <xs:element name="BpelConfigs" type="BpelConfigs" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="BpelConfigs">
+      <xs:sequence>
+         <xs:element name="bpelId" type="xs:long"/>
+         <xs:element name="bpelEncoding" type="string20" minOccurs="0" nillable="true"/>
+         <xs:element name="bpelCountry" type="string10" minOccurs="0" nillable="true"/>
+         <xs:element name="bpelEnvironment" type="string10" minOccurs="0" nillable="true"/>
+         <xs:element name="bpelDescription" type="xs:string" minOccurs="0" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="dbAdapterSelectInputParameters" type="dbAdapterSelect"/>
+   <xs:complexType name="dbAdapterSelect">
+      <xs:sequence/>
+   </xs:complexType>
+   <xs:simpleType name="string20">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="20"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="string10">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="10"/>
+      </xs:restriction>
+   </xs:simpleType>
+</xs:schema>

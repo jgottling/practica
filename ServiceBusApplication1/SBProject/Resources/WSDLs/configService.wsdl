@@ -1,0 +1,44 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="configService"
+     targetNamespace="http://xmlns.oracle.com/ServiceBusApplication1/SBProject/configService"
+     xmlns:tns="http://xmlns.oracle.com/ServiceBusApplication1/SBProject/configService"
+     xmlns:inp1="getConfigData.xsd"
+     xmlns:inp2="bpelConfigData.xsd"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+    <wsdl:types>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="getConfigData.xsd" schemaLocation="../schemas/getConfigData.xsd"/>
+        </xsd:schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="bpelConfigData.xsd" schemaLocation="../schemas/bpelConfigData.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="requestMessage">
+        <wsdl:part name="configData" element="inp1:getConfigData"/>
+    </wsdl:message>
+    <wsdl:message name="replyMessage">
+        <wsdl:part name="bpelConfigData" element="inp2:bpelConfigdataType"/>
+    </wsdl:message>
+    <wsdl:portType name="configService">
+        <wsdl:operation name="getConfig">
+            <wsdl:input message="tns:requestMessage"/>
+            <wsdl:output message="tns:replyMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="execute_bind" type="tns:configService">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="getConfig">
+            <soap:operation style="document" soapAction="getConfig"/>
+            <wsdl:input>
+                <soap:body use="literal" namespace="http://xmlns.oracle.com/ServiceBusApplication1/SBProject/configService"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" namespace="http://xmlns.oracle.com/ServiceBusApplication1/SBProject/configService"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+</wsdl:definitions>
