@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config">
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
     <con:coreEntry>
         <con:binding type="SOAP" isSoap12="false" xsi:type="con:SoapBindingType">
             <con:wsdl ref="SBProject/Resources/WSDLs/configService"/>
@@ -17,6 +17,14 @@
             <con:stage id="_StageId-N3f57fefc.N43015299.0.1744b44fd05.N7ffc" name="Stage1">
                 <con:context/>
                 <con:actions>
+                    <con3:log>
+                        <con2:id>_ActionId-N3f57fefc.N23549874.0.1746de3e099.N7ffb</con2:id>
+                        <con3:logLevel>debug</con3:logLevel>
+                        <con3:expr>
+                            <con2:xqueryText>$body</con2:xqueryText>
+                        </con3:expr>
+                        <con3:message>received</con3:message>
+                    </con3:log>
                     <con1:assign varName="bodyBack">
                         <con2:id>_ActionId-N3f57fefc.N43015299.0.1744b44fd05.N7ec2</con2:id>
                         <con1:expr>
@@ -25,11 +33,57 @@
                     </con1:assign>
                 </con:actions>
             </con:stage>
+            <con:stage id="_StageId-N3f57fefc.N79e0e004.0.1745a52646d.N7f96" name="Stage2">
+                <con:context>
+                    <con2:userNsDecl prefix="get" namespace="getConfigData.xsd"/>
+                    <con2:userNsDecl prefix="bpel" namespace="bpelConfigData.xsd"/>
+                </con:context>
+                <con:actions>
+                    <con1:wsCallout>
+                        <con2:id>_ActionId-N3f57fefc.N79e0e004.0.1745a52646d.N7f95</con2:id>
+                        <con1:service ref="SBProject/Resources/database/dbAdapter_db" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con1:operation>dbAdapterSelect</con1:operation>
+                        <con1:request>
+                            <con1:body wrapped="true">body</con1:body>
+                            <con1:header/>
+                        </con1:request>
+                        <con1:response>
+                            <con1:body wrapped="true">body</con1:body>
+                        </con1:response>
+                        <con1:requestTransform/>
+                        <con1:responseTransform>
+                            <con1:assign varName="data">
+                                <con2:id>_ActionId-N3f57fefc.N79e0e004.0.1745a52646d.N7f92</con2:id>
+                                <con1:expr>
+                                    <con2:xqueryText>$body/bpel:bpelConfigdataType</con2:xqueryText>
+                                </con1:expr>
+                            </con1:assign>
+                        </con1:responseTransform>
+                    </con1:wsCallout>
+                </con:actions>
+            </con:stage>
         </con:pipeline>
         <con:pipeline type="response" name="response-N3f57fefc.N43015299.0.1744b44fd05.N7ffd">
             <con:stage id="_StageId-N3f57fefc.N43015299.0.1744b44fd05.N7ffb" name="Stage1">
-                <con:context/>
-                <con:actions/>
+                <con:context>
+                    <con2:userNsDecl prefix="bpel" namespace="bpelConfigData.xsd"/>
+                </con:context>
+                <con:actions>
+                    <con1:assign varName="body">
+                        <con2:id>_ActionId-N3f57fefc.N79e0e004.0.1745a52646d.N7ffe</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$body/bpel:bpelConfigdataType</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con3:log>
+                        <con2:id>_ActionId-N3f57fefc.N23549874.0.1746de3e099.N7ff8</con2:id>
+                        <con3:logLevel>debug</con3:logLevel>
+                        <con3:expr>
+                            <con2:xqueryText>$body</con2:xqueryText>
+                        </con3:expr>
+                        <con3:message>sending</con3:message>
+                    </con3:log>
+                </con:actions>
             </con:stage>
         </con:pipeline>
         <con:flow>
@@ -37,22 +91,6 @@
                 <con:request>request-N3f57fefc.N43015299.0.1744b44fd05.N7ffe</con:request>
                 <con:response>response-N3f57fefc.N43015299.0.1744b44fd05.N7ffd</con:response>
             </con:pipeline-node>
-            <con:route-node name="RouteNode1" xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config">
-                <con:context/>
-                <con:actions>
-                    <con1:route>
-                        <con2:id>_ActionId-N3f57fefc.184535fc.0.1745a445c54.N7f9a</con2:id>
-                        <con1:service ref="SBProject/Resources/database/dbAdapter_db" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
-                        <con1:operation passThrough="true"/>
-                        <con1:outboundTransform/>
-                        <con1:responseTransform>
-                            <con3:assign xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config">
-                                <con2:id>_ActionId-N3f57fefc.184535fc.0.1745a445c54.N7f97</con2:id>
-                            </con3:assign>
-                        </con1:responseTransform>
-                    </con1:route>
-                </con:actions>
-            </con:route-node>
         </con:flow>
     </con:router>
 </con:pipelineEntry>
