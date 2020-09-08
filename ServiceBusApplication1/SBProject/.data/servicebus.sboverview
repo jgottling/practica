@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ns:composite xmlns:ns="http://xmlns.oracle.com/sca/1.0">
     <ns:reference>
-        <ns:interface src="BusinessService:SBProject/Resources/database/dbAdapter_db"/>
+        <ns:interface src="BusinessService:SBProject/Resources/config_manager_db_bs"/>
     </ns:reference>
 </ns:composite>

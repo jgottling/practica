@@ -1,5 +1,5 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/dbAdapter" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/dbAdapter" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/config_db" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/config_db" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
    <xs:element name="BpelConfigsCollection" type="BpelConfigsCollection"/>
    <xs:complexType name="BpelConfigsCollection">
       <xs:sequence>
@@ -15,8 +15,8 @@
          <xs:element name="bpelDescription" type="xs:string" minOccurs="0" nillable="true"/>
       </xs:sequence>
    </xs:complexType>
-   <xs:element name="dbAdapterSelectInputParameters" type="dbAdapterSelect"/>
-   <xs:complexType name="dbAdapterSelect">
+   <xs:element name="config_dbSelectInputParameters" type="config_dbSelect"/>
+   <xs:complexType name="config_dbSelect">
       <xs:sequence/>
    </xs:complexType>
    <xs:simpleType name="string20">
